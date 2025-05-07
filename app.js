@@ -1,8 +1,48 @@
 import { BrowserBarcodeReader } from "https://unpkg.com/@zxing/browser";
 
 const barcodeInput = document.getElementById('barcode-input');
+const form = document.getElementById('food-form');
+const logList = document.getElementById('log-list');
 const reader = new BrowserBarcodeReader();
 
+// Load the log from localStorage when the page loads
+function loadLog() {
+  const log = JSON.parse(localStorage.getItem('foodLog')) || [];
+  logList.innerHTML = ''; // Clear current list
+  log.forEach((item) => {
+    const li = document.createElement('li');
+    li.className = 'bg-white p-2 rounded shadow';
+    li.innerHTML = `<strong>${item.name}</strong>: ${item.calories} kcal (${item.protein}g P, ${item.carbs}g C, ${item.fat}g F)`;
+    logList.appendChild(li);
+  });
+}
+
+// Handle food form submission
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const food = {
+    name: document.getElementById('food-name').value,
+    calories: parseInt(document.getElementById('calories').value),
+    protein: parseInt(document.getElementById('protein').value) || 0,
+    carbs: parseInt(document.getElementById('carbs').value) || 0,
+    fat: parseInt(document.getElementById('fat').value) || 0,
+  };
+
+  // Save the food log to localStorage
+  const log = JSON.parse(localStorage.getItem('foodLog')) || [];
+  log.push(food);
+  localStorage.setItem('foodLog', JSON.stringify(log));
+
+  // Clear the form and reload the log
+  form.reset();
+  loadLog();
+});
+
+// Load log on page load
+loadLog();
+
+// Barcode scanning logic
 barcodeInput.addEventListener('change', async (event) => {
   const file = event.target.files[0];
   if (!file) return;
