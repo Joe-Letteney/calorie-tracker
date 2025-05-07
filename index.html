@@ -24,8 +24,9 @@
 
     <!-- Barcode Scanner -->
     <div class="mt-6">
-      <button id="start-scan" class="w-full bg-green-500 text-white py-2 rounded">Scan Barcode</button>
-      <video id="scanner-preview" class="mt-4 w-full" style="display: none;"></video>
+      <input type="file" accept="image/*" capture="environment" id="barcode-input" class="w-full bg-green-500 text-white py-2 rounded text-center" />
+       <p class="text-sm text-gray-500 mt-2">Tap to scan a barcode using your camera.</p>
+
     </div>
 
     <!-- Log Display -->
