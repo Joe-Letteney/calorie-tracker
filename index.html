@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calorie Tracker</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <script type="module" src="https://unpkg.com/@zxing/browser@latest"></script>
+  <script defer src="app.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 p-4">
+  <div class="max-w-md mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Calorie & Macro Tracker</h1>
+
+    <!-- Food Logging Form -->
+    <form id="food-form" class="space-y-2">
+      <input type="text" id="food-name" placeholder="Food Name" class="w-full p-2 border rounded" required />
+      <input type="number" id="calories" placeholder="Calories" class="w-full p-2 border rounded" required />
+      <input type="number" id="protein" placeholder="Protein (g)" class="w-full p-2 border rounded" />
+      <input type="number" id="carbs" placeholder="Carbs (g)" class="w-full p-2 border rounded" />
+      <input type="number" id="fat" placeholder="Fat (g)" class="w-full p-2 border rounded" />
+      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">Add Food</button>
+    </form>
+
+    <!-- Barcode Scanner -->
+    <div class="mt-6">
+      <button id="start-scan" class="w-full bg-green-500 text-white py-2 rounded">Scan Barcode</button>
+      <video id="scanner-preview" class="mt-4 w-full" style="display: none;"></video>
+    </div>
+
+    <!-- Log Display -->
+    <div class="mt-6">
+      <h2 class="text-xl font-semibold mb-2">Today's Log</h2>
+      <ul id="log-list" class="space-y-2"></ul>
+    </div>
+  </div>
+</body>
+</html>
